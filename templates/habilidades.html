@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Habilidades{% endblock %}
+
+{% block content %}
+<div class="container my-5 pt-5">
+    <h1 class="text-center mb-5">Mis Habilidades Técnicas</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% for habilidad in habilidades %}
+            <div class="mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>
+                        <i class="{{ habilidad.icono }} me-2" style="color: {{ habilidad.color }}"></i>
+                        <strong>{{ habilidad.nombre }}</strong>
+                    </span>
+                    <span class="text-primary">{{ habilidad.nivel }}%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" 
+                         style="width: {{ habilidad.nivel }}%; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);"
+                         aria-valuenow="{{ habilidad.nivel }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

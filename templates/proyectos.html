@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Proyectos{% endblock %}
+
+{% block content %}
+<div class="container my-5 pt-5">
+    <h1 class="text-center mb-5">Mis Proyectos</h1>
+    <div class="row">
+        {% for proyecto in proyectos %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow project-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ proyecto.titulo }}</h5>
+                    <p class="card-text">{{ proyecto.descripcion }}</p>
+                    <div class="mb-3">
+                        {% for tech in proyecto.tecnologias %}
+                        <span class="badge bg-info me-1 mb-1">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ proyecto.url }}" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-github me-2"></i>Ver en GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+<div class="container my-5 pt-5">
+    <h1 class="text-center mb-5">Contacto</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>{{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-user-circle text-primary me-2"></i>Información de Contacto
+                    </h3>
+                    
+                    <div class="mb-4 pb-2 border-bottom">
+                        <h5><i class="fas fa-user text-primary me-2"></i>Nombre Completo:</h5>
+                        <p class="ms-4 fs-5">{{ mi_nombre }}</p>
+                    </div>
+                    
+                    <div class="mb-4 pb-2 border-bottom">
+                        <h5><i class="fas fa-envelope text-primary me-2"></i>Correo Electrónico:</h5>
+                        <p class="ms-4">
+                            <a href="mailto:{{ mi_correo }}" class="text-decoration-none fs-5">
+                                <i class="fas fa-envelope me-1"></i>{{ mi_correo }}
+                            </a>
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4 pb-2 border-bottom">
+                        <h5><i class="fas fa-phone text-primary me-2"></i>Teléfono / WhatsApp:</h5>
+                        <p class="ms-4">
+                            <a href="https://wa.me/59176549227" target="_blank" class="text-decoration-none fs-5">
+                                <i class="fab fa-whatsapp text-success me-2"></i>{{ mi_telefono }}
+                            </a>
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4 pb-2 border-bottom">
+                        <h5><i class="fas fa-map-marker-alt text-primary me-2"></i>Ubicación:</h5>
+                        <p class="ms-4 fs-5">{{ mi_ubicacion }}</p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5 class="mb-3"><i class="fab fa-github text-primary me-2"></i>GitHub:</h5>
+                        <div class="d-flex gap-3">
+                            <a href="{{ mi_github }}" target="_blank" class="btn btn-dark">
+                                <i class="fab fa-github me-2"></i>Visitar GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-7 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-4">
+                        <i class="fas fa-paper-plane text-primary me-2"></i>Envíame un Mensaje
+                    </h3>
+                    <p class="text-muted mb-4">Completa el formulario y te responderé a la brevedad posible.</p>
+                    
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-user me-1 text-primary"></i>{{ form.nombre.label }}
+                            </label>
+                            {{ form.nombre(class="form-control form-control-lg", placeholder="Ej: Juan Pérez") }}
+                            {% for error in form.nombre.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-envelope me-1 text-primary"></i>{{ form.email.label }}
+                            </label>
+                            {{ form.email(class="form-control form-control-lg", placeholder="tu@email.com") }}
+                            {% for error in form.email.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-comment me-1 text-primary"></i>{{ form.mensaje.label }}
+                            </label>
+                            {{ form.mensaje(class="form-control form-control-lg", rows=5, placeholder="Escribe tu mensaje aquí...") }}
+                            {% for error in form.mensaje.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="d-grid">
+                            {{ form.enviar(class="btn btn-primary btn-lg") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
